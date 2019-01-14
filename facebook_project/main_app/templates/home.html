@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block header_title %} Home{% endblock %}
+
+{% block content %}
+
+{% if logged_in %}
+<p>logged_in</p>
+{% else %}
+<p>not logged in</p>
+{% endif %}
+
+{% endblock %}
