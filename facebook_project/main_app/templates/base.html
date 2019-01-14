@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+		<title>{%block title %}Title{% endblock %}</title>
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+		<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand " href="{% url 'main_app:home'%}" id="hive_logo_a">
+			<img src="{% static 'images/hive_logo.png'%}" id="hive_logo">
+		</a>
+		
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav mr-auto pl-5">
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'main_app:home' %}">Home</a>
+				</li>
+				{% if logged_in %}
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							My Account
+						</a>
+					</li>
+					
+					<li class="nav-item">
+				
+					<div class = "bloc-user ">
+					{% if not user.userprofileinfo.profile_pic %}
+
+						<div class="button-signup inset">
+							<img src="{% static 'images/no-picture.png' %}" >
+						</div>
+					{% else%}
+						<a href="{% url 'main_app:home'%}">
+						<div class="button-signup inset">
+							<img src="{{user.userprofileinfo.profile_pic.url}}" >
+						</div>
+						</a>
+					{% endif %}
+					
+					<div class="user-profile">
+						<a href="{% url 'main_app:home'%}">
+						<p>{{user.username}} </p>
+						</a>
+					</div>
+
+					<div class="button-logout">
+						<a href="{% url 'login_app:logging_out' %}" class="btn btn-danger btn-lg active " role="button" aria-pressed="true">Logout</a>
+					</div>
+				</div>
+				</li>
+
+				
+
+				{% else %}
+				
+				<div class = "bloc-user ">
+				
+					<div class="button-login">
+						<a href="{% url 'login_app:loginpage' %}" class="btn btn-danger btn-lg active " role="button" aria-pressed="true">Login</a>
+					</div>
+					<div class="button-signup">
+						<a href="{% url 'login_app:signup' %}" class="btn btn-danger btn-lg active " role="button" aria-pressed="true">Sign up</a>
+					</div>
+				
+				</div>
+				
+				{% endif %}	
+			</ul>
+		</div>
+	</nav>  
+
+	{% block content %}{% endblock %}
+
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>
